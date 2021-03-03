@@ -1,26 +1,23 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using MoviesASP_GC.Models;
+using MoviesAPI_GC.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MoviesASP_GC.Controllers
+namespace MoviesAPI_GC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+        private MovieDAL md = new MovieDAL();
 
         public IActionResult Index()
         {
-            return View();
+            List<Movie> myMovie = md.SearchMovies("Shrek");
+            Movie a = md.singleMovie(12);
+            return View(a);
         }
 
         public IActionResult Privacy()

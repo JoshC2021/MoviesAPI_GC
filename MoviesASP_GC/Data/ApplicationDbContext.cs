@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MoviesASP_GC.Data
+namespace MoviesAPI_GC.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {

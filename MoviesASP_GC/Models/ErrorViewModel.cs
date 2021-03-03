@@ -1,6 +1,6 @@
 using System;
 
-namespace MoviesASP_GC.Models
+namespace MoviesAPI_GC.Models
 {
     public class ErrorViewModel
     {

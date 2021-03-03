@@ -7,16 +7,18 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MoviesASP_GC.Data;
+using MoviesAPI_GC.Data;
+using MoviesAPI_GC.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MoviesASP_GC
+namespace MoviesAPI_GC
 {
     public class Startup
     {
+        string connection = "Server=.\\SQLExpress;Database=MovieAPIDb;Trusted_Connection=True;MultipleActiveResultSets=true";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -34,6 +36,8 @@ namespace MoviesASP_GC
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddDbContext<MovieAPIDbContext>(options => options.UseSqlServer(connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

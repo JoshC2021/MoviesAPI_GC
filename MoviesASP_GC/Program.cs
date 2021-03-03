@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MoviesASP_GC
+namespace MoviesAPI_GC
 {
     public class Program
     {
