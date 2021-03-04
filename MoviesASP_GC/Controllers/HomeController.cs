@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace MoviesAPI_GC.Controllers
@@ -21,7 +22,6 @@ namespace MoviesAPI_GC.Controllers
         }
         public IActionResult Index()
         {
-
             return View();
         }
         public IActionResult ViewSingleMovie(int id)
@@ -30,24 +30,46 @@ namespace MoviesAPI_GC.Controllers
             return View(a);
         }
 
-
-
-
         public IActionResult Search(string search)
         {
             List<Movie> movies = md.SearchMovies(search);
             return View(movies);
         }
 
+        public IActionResult Favorites()
+        {
+            // finds users favorite movies and returns list to view
+
+            // first access database
+            string user = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            List<FavoriteMovies> userFavorites = _favoriteDB.FavoriteMovies.Where(x => x.UserId == user).ToList();
+
+            // consult API
+            List<Movie> movies = new List<Movie>();
+            foreach (FavoriteMovies fm in userFavorites)
+            {
+                movies.Add(md.singleMovie(fm.FavId));
+            }
+            return View(movies);
+        }
+
+        public IActionResult Delete(int id)
+        {
+            string user = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            List<FavoriteMovies> userFavorites = _favoriteDB.FavoriteMovies.Where(x => x.UserId == user).ToList();
+
+            // id represents the movie id to be removed
+            FavoriteMovies deleteMovie = userFavorites.Find(x => x.Id == id);
+
+            _favoriteDB.Remove(deleteMovie.Id);                                                                                                                                                                                                                                                     
+            _favoriteDB.SaveChanges();
+                                                                                                                            
+            return RedirectToAction("Favorites");
+        }
+
         public IActionResult Privacy()
         {
             return View();
-        }
-
-        public IActionResult Results(string search)
-        {
-            List<Movie> searchResults = md.SearchMovies(search);
-            return View(searchResults);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
