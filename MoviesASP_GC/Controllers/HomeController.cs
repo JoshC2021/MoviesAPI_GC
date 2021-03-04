@@ -25,6 +25,14 @@ namespace MoviesAPI_GC.Controllers
             Movie a = md.singleMovie(12);
             return View(a);
         }
+        public IActionResult ViewSingleMovie(int id)
+        {
+            Movie a = md.singleMovie(12);
+            return View(a);
+        }
+
+
+
 
         public IActionResult Search(string search)
         {
