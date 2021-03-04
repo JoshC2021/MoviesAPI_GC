@@ -39,6 +39,17 @@ namespace MoviesAPI_GC.Models
             string json = rd.ReadToEnd();
             return json;
         }
+        public string GetData(string sortMethod, int pageNo) // Featured-index
+        {
+            string url = $"https://api.themoviedb.org/3/discover/movie?api_key={Secret.MovieAPIKey}&language=en-US&sort_by={sortMethod}&include_adult=false&include_video=false&page={pageNo}"; 
+
+            HttpWebRequest request = WebRequest.CreateHttp(url);
+            HttpWebResponse response = null;
+            response = (HttpWebResponse)request.GetResponse();
+            StreamReader rd = new StreamReader(response.GetResponseStream());
+            string json = rd.ReadToEnd();
+            return json;
+        }
 
         public Movie singleMovie(int iD)
         {
@@ -53,6 +64,14 @@ namespace MoviesAPI_GC.Models
             Rootobject r = JsonConvert.DeserializeObject<Rootobject>(json);
             List<Movie> qMovies = r.results.ToList();
             return qMovies;
+
+        }
+        public List<Result> SortFeatured(string sortMethod, int pageNo)
+        {
+            string json = GetData(sortMethod, pageNo);
+            Featured f = JsonConvert.DeserializeObject<Featured>(json);
+            List<Result> featured = f.results.ToList();
+            return featured;
 
         }
     }

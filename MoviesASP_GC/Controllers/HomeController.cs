@@ -31,6 +31,13 @@ namespace MoviesAPI_GC.Controllers
             return View(a);
         }
 
+        public IActionResult Index(string sortMethod, int pageNo)
+        {
+            pageNo = 1;
+            List<Result> featured = md.SortFeatured(sortMethod, pageNo);
+            return View(featured);
+        }
+
         public IActionResult Search(string search)
         {
             List<Movie> movies = md.SearchMovies(search);

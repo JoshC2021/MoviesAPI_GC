@@ -1,7 +1,42 @@
-﻿<form asp-action="Search" asp-controller="Home" >
+﻿@model List<Result>
 
+<form asp-action="Search" asp-controller="Home">
     <input type="text" name="search" placeholder="Search Movies by Title" />
     <input type="submit" value="Search" />
+    <br />
+</form>
 
+<form asp-action="Index" asp-controller="Home">
+    <label for="sort">Sort by:</label>
+    <select id="sort" name="sortMethod">
+        <option value="popularity.desc">Popularity (desc.)</option>
+        <option value="popularity.asc">Popularity (asc.)</option>
+        <option value="release_date.desc">Release Date (desc.)</option>
+        <option value="release_date.asc">Release Date (asc.)</option>
+        <option value="original_title.desc">Name(desc.)</option>
+        <option value="original_title.asc">Name(asc.)</option>
+    </select>
+    <input type="submit" name="sortMethod" value="Sort" />
+</form>
 
+@foreach (Result r in Model)
+{
+    string posterURL = "https://image.tmdb.org/t/p/original" + @r.poster_path;
+    <a asp-action="ViewSingleMovie" asp-route-id="@r.id">
+
+        <img src=" @posterURL" alt="No Img" width="100" height="100" />
+        <h3>@r.original_title</h3>
+        <p>@r.popularity</p>
+        <br />
+    </a>
+}
+<form asp-action="Index" asp-controller="Home">
+    
+
+        @for (int i = 0; i < 500; i++)
+        {
+
+        }
+    
+    <input type="button" name="pageNo" value="Next Page" />
 </form>
