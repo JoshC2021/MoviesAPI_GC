@@ -11,6 +11,7 @@ namespace MoviesAPI_GC.Models
             AspNetUserLogins = new HashSet<AspNetUserLogins>();
             AspNetUserRoles = new HashSet<AspNetUserRoles>();
             AspNetUserTokens = new HashSet<AspNetUserTokens>();
+            FavoriteMovies = new HashSet<FavoriteMovies>();
         }
 
         public string Id { get; set; }
@@ -33,5 +34,6 @@ namespace MoviesAPI_GC.Models
         public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual ICollection<AspNetUserTokens> AspNetUserTokens { get; set; }
+        public virtual ICollection<FavoriteMovies> FavoriteMovies { get; set; }
     }
 }
