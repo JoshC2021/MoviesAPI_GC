@@ -22,17 +22,23 @@
 @foreach (Movie r in Model)
 {
     string posterURL = "https://image.tmdb.org/t/p/original" + @r.poster_path;
-    <a asp-action="ViewSingleMovie" asp-route-id="@r.id">
+    <a asp-action="ViewSingleMovie" asp-controller="Home" asp-route-id="@r.id">
 
-        <img src=" @posterURL" alt="No Img"  height="100" />
+        <img src=" @posterURL" alt="No Img" height="100" />
         <h3>@r.original_title</h3>
         <p>@r.popularity</p>
         <br />
     </a>
+
+    <a asp-action="ViewSingleMovie" asp-route-id="@r.id">
+        <button>
+            More Details
+        </button>
+    </a>
 }
 <form asp-action="Index" asp-controller="Home">
 
-     
+
 
     <input type="button" name="pageNo" value="Next Page" />
 </form>
