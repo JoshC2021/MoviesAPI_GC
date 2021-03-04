@@ -21,13 +21,12 @@ namespace MoviesAPI_GC.Controllers
         }
         public IActionResult Index()
         {
-            List<Movie> myMovie = md.SearchMovies("Shrek");
-            Movie a = md.singleMovie(12);
-            return View(a);
+
+            return View();
         }
         public IActionResult ViewSingleMovie(int id)
         {
-            Movie a = md.singleMovie(12);
+            Movie a = md.singleMovie(id);
             return View(a);
         }
 
