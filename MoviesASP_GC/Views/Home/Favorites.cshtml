@@ -1,0 +1,16 @@
+﻿@model List<Movie>
+
+@foreach (Movie m in Model)
+{
+    string posterURL = "https://image.tmdb.org/t/p/original" + @m.poster_path;
+    <h2>@m.title</h2>
+    <img src=" @posterURL" alt="No Img" width="100" height="100" />
+    <h4>Release Date: @m.release_date</h4>
+    <a asp-action="ViewSingleMovie" asp-route-id="@m.id">
+        <button>
+            More Details
+        </button>
+    </a>
+    <a asp-action="Delete" asp-route-id="@m.id">Remove Favorite</a>
+    <br />
+}

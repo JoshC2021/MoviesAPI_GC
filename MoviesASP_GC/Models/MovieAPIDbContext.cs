@@ -22,7 +22,6 @@ namespace MoviesAPI_GC.Models
         public virtual DbSet<AspNetUserRoles> AspNetUserRoles { get; set; }
         public virtual DbSet<AspNetUserTokens> AspNetUserTokens { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
-        public virtual DbSet<AspNetUsersFavoriteMovies> AspNetUsersFavoriteMovies { get; set; }
         public virtual DbSet<FavoriteMovies> FavoriteMovies { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -134,27 +133,17 @@ namespace MoviesAPI_GC.Models
                 entity.Property(e => e.UserName).HasMaxLength(256);
             });
 
-            modelBuilder.Entity<AspNetUsersFavoriteMovies>(entity =>
+            modelBuilder.Entity<FavoriteMovies>(entity =>
             {
-                entity.HasNoKey();
-
-                entity.ToTable("AspNetUsers_FavoriteMovies");
-
                 entity.Property(e => e.UserId)
                     .IsRequired()
                     .HasMaxLength(450);
 
-                entity.HasOne(d => d.Fav)
-                    .WithMany()
-                    .HasForeignKey(d => d.FavId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__AspNetUse__FavId__4D94879B");
-
                 entity.HasOne(d => d.User)
-                    .WithMany()
+                    .WithMany(p => p.FavoriteMovies)
                     .HasForeignKey(d => d.UserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__AspNetUse__UserI__4CA06362");
+                    .HasConstraintName("FK__FavoriteM__UserI__5EBF139D");
             });
 
             OnModelCreatingPartial(modelBuilder);
