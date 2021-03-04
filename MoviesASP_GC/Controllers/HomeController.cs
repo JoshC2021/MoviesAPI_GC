@@ -13,6 +13,12 @@ namespace MoviesAPI_GC.Controllers
     {
         private MovieDAL md = new MovieDAL();
 
+        private readonly MovieAPIDbContext _favoriteDB;
+
+        public HomeController(MovieAPIDbContext favoritesContext)
+        {
+            _favoriteDB = favoritesContext;
+        }
         public IActionResult Index()
         {
             List<Movie> myMovie = md.SearchMovies("Shrek");
@@ -31,10 +37,18 @@ namespace MoviesAPI_GC.Controllers
             return View();
         }
 
+        public IActionResult Results(string search)
+        {
+            List<Movie> searchResults = md.SearchMovies(search);
+            return View(searchResults);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
     }
 }
