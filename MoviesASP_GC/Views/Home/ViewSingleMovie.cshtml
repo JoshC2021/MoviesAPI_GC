@@ -48,7 +48,7 @@
 
         <h6>Run time</h6>
         <p>@Model.runtime minutes</p>
-
+        <p style="color:red">@TempData["error"]</p>
         <a asp-action="AddToFavorites" asp-controller="Home" asp-route-id="@Model.id">
             <button>
                 Add Movie To My Favorites
