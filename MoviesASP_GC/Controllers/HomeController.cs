@@ -21,10 +21,7 @@ namespace MoviesAPI_GC.Controllers
         {
             _favoriteDB = favoritesContext;
         }
-        public IActionResult Index()
-        {
-            return View();
-        }
+
         public IActionResult ViewSingleMovie(int id)
         {
             Movie a = md.singleMovie(id);
