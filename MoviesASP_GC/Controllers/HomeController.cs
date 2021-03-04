@@ -75,11 +75,11 @@ namespace MoviesAPI_GC.Controllers
             List<FavoriteMovies> userFavorites = _favoriteDB.FavoriteMovies.Where(x => x.UserId == user).ToList();
 
             // id represents the movie id to be removed
-            FavoriteMovies deleteMovie = userFavorites.Find(x => x.Id == id);
+            FavoriteMovies deleteMovie = userFavorites.FirstOrDefault(x => x.FavId == id);
 
-            _favoriteDB.Remove(deleteMovie.Id);                                                                                                                                                                                                                                                     
+            _favoriteDB.FavoriteMovies.Remove(deleteMovie);
             _favoriteDB.SaveChanges();
-                                                                                                                            
+
             return RedirectToAction("Favorites");
         }
 
