@@ -43,15 +43,26 @@ namespace MoviesAPI_GC.Controllers
         [Authorize]
         public IActionResult AddToFavorites(int id)
         {
-            string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            
-            FavoriteMovies newFav = new FavoriteMovies();
-            newFav.UserId = userId;
-            newFav.FavId = id;
-            _favoriteDB.FavoriteMovies.Add(newFav);
-            _favoriteDB.SaveChanges();
-            return RedirectToAction("Index");
+            string user = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            List<FavoriteMovies> userFavorites = _favoriteDB.FavoriteMovies.Where(x => x.UserId == user).ToList();
+            if (userFavorites.Where(x => x.FavId == id).Count() > 0)
+            {
+                TempData["error"] = "This Movie is already in your list of favorites";
+                return RedirectToAction("ViewSingleMovie", new { id = id });
+               
+            }
+            else
+            {
+                FavoriteMovies newFav = new FavoriteMovies();
+                newFav.UserId = user;
+                newFav.FavId = id;
+                _favoriteDB.FavoriteMovies.Add(newFav);
+                _favoriteDB.SaveChanges();
+                return RedirectToAction("Favorites");
+            }
+
         }
+      
         public IActionResult Favorites()
         {
             // finds users favorite movies and returns list to view
