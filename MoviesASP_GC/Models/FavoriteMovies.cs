@@ -11,4 +11,6 @@ namespace MoviesAPI_GC.Models
 
         public virtual AspNetUsers User { get; set; }
     }
+
+   
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MoviesAPI_GC.Models;
 using System;
@@ -35,7 +36,18 @@ namespace MoviesAPI_GC.Controllers
             List<Movie> movies = md.SearchMovies(search);
             return View(movies);
         }
-
+        [Authorize]
+        public IActionResult AddToFavorites(int id)
+        {
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            
+            FavoriteMovies newFav = new FavoriteMovies();
+            newFav.UserId = userId;
+            newFav.FavId = id;
+            _favoriteDB.FavoriteMovies.Add(newFav);
+            _favoriteDB.SaveChanges();
+            return RedirectToAction("Index");
+        }
         public IActionResult Favorites()
         {
             // finds users favorite movies and returns list to view
