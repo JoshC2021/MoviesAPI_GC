@@ -13,11 +13,12 @@ namespace MoviesAPI_GC.Controllers
     {
         private MovieDAL md = new MovieDAL();
 
-        public IActionResult Index()
+        public IActionResult Index(string sortMethod, int pageNo)
         {
-            List<Movie> myMovie = md.SearchMovies("Shrek");
-            Movie a = md.singleMovie(12);
-            return View(a);
+
+            //List<Movie> myMovie = md.SearchMovies("Shrek");
+            //Movie a = md.singleMovie(12);
+            return View();
         }
 
         public IActionResult Search(string search)

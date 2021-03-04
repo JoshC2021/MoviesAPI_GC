@@ -1,7 +1,20 @@
-﻿<form asp-action="Search" asp-controller="Home" >
+﻿@model Featured
 
+<form asp-action="Search" asp-controller="Home" >
     <input type="text" name="search" placeholder="Search Movies by Title" />
     <input type="submit" value="Search" />
+    <br />
+</form>
 
+<form asp-action="Index" asp-controller="Home">
+    <label for="sort">Sort by:</label>
+    <select id="sort" name="sortMethod">
+        <option value="popularity.desc">Popularity (desc.)</option>
+        <option value="popularity.asc">Popularity (asc.)</option>
+        <option value="release_date.desc">Release Date (desc.)</option>
+        <option value="release_date.asc">Release Date (asc.)</option>
+        <option value="original_title.desc">Name(desc.)</option>
+        <option value="original_title.asc">Name(asc.)</option>
+    </select>
 
 </form>
