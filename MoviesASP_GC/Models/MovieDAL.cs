@@ -66,11 +66,11 @@ namespace MoviesAPI_GC.Models
             return qMovies;
 
         }
-        public List<Result> SortFeatured(string sortMethod, int pageNo)
+        public List<Movie> SortFeatured(string sortMethod, int pageNo)
         {
             string json = GetData(sortMethod, pageNo);
-            Featured f = JsonConvert.DeserializeObject<Featured>(json);
-            List<Result> featured = f.results.ToList();
+            Rootobject f = JsonConvert.DeserializeObject<Rootobject>(json);
+            List<Movie> featured = f.results.ToList();
             return featured;
 
         }

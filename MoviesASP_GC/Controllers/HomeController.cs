@@ -16,7 +16,7 @@ namespace MoviesAPI_GC.Controllers
         public IActionResult Index(string sortMethod, int pageNo)
         {
             pageNo = 1;
-            List<Result> featured = md.SortFeatured(sortMethod, pageNo);
+            List<Movie> featured = md.SortFeatured(sortMethod, pageNo);
             return View(featured);
         }
 
