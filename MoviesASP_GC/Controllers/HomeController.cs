@@ -20,6 +20,12 @@ namespace MoviesAPI_GC.Controllers
             return View(a);
         }
 
+        public IActionResult Search(string search)
+        {
+            List<Movie> movies = md.SearchMovies(search);
+            return View(movies);
+        }
+
         public IActionResult Privacy()
         {
             return View();

@@ -1,2 +1,7 @@
-﻿@model Movie
-<h2>@Model.original_title</h2> 
+﻿<form asp-action="Search" asp-controller="Home" >
+
+    <input type="text" name="search" placeholder="Search Movies by Title" />
+    <input type="submit" value="Search" />
+
+
+</form>
