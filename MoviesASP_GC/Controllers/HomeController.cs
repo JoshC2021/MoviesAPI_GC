@@ -13,13 +13,15 @@ namespace MoviesAPI_GC.Controllers
     {
         private MovieDAL md = new MovieDAL();
 
-        public IActionResult Index(string sortMethod, int pageNo)
+        public IActionResult Index()
         {
-
-            //List<Movie> myMovie = md.SearchMovies("Shrek");
-            //Movie a = md.singleMovie(12);
-            return View();
+            List<Movie> myMovie = md.SearchMovies("Shrek");
+            Movie a = md.singleMovie(12);
+            return View(a);
         }
+
+
+
 
         public IActionResult Search(string search)
         {
@@ -32,10 +34,18 @@ namespace MoviesAPI_GC.Controllers
             return View();
         }
 
+        public IActionResult Results(string search)
+        {
+            List<Movie> searchResults = md.SearchMovies(search);
+            return View(searchResults);
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
     }
 }
