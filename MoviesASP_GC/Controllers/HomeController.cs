@@ -24,11 +24,26 @@ namespace MoviesAPI_GC.Controllers
 
         public IActionResult ViewSingleMovie(int id)
         {
-            Movie a = md.singleMovie(id);
-            return View(a);
+            Movie a = new Movie();
+            try
+            {
+                a = md.singleMovie(id);
+                return View(a);
+            }
+            catch(Exception e)
+            {
+
+            }
+            return RedirectToAction("Mistake");
+
         }
 
-        public IActionResult Index(string sortMethod, int pageNo)
+        public IActionResult Mistake()
+        {
+            return View();
+        }
+
+            public IActionResult Index(string sortMethod, int   pageNo)
         {
             pageNo = 1;
             List<Movie> featured = md.SortFeatured(sortMethod, pageNo);
