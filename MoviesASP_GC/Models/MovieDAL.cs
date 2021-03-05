@@ -41,7 +41,7 @@ namespace MoviesAPI_GC.Models
         }
         public string GetData(string sortMethod, int pageNo) // Featured-index
         {
-            string url = $"https://api.themoviedb.org/3/discover/movie?api_key={Secret.MovieAPIKey}&language=en-US&sort_by={sortMethod}&include_adult=false&include_video=false&page={pageNo}"; 
+            string url = $"https://api.themoviedb.org/3/discover/movie?api_key={Secret.MovieAPIKey}&language=en-US&&with_genres={sortMethod}&include_adult=false&include_video=false&page={pageNo}"; 
 
             HttpWebRequest request = WebRequest.CreateHttp(url);
             HttpWebResponse response = null;

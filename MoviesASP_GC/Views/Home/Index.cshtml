@@ -4,20 +4,27 @@
     <input type="text" name="search" placeholder="Search Movies by Title" />
     <input type="submit" value="Search" />
     <br />
+
 </form>
 
 <form asp-action="Index" asp-controller="Home">
-    <label for="sort">Sort by:</label>
-    <select id="sort" name="sortMethod">
-        <option value="popularity.desc">Popularity (desc.)</option>
-        <option value="popularity.asc">Popularity (asc.)</option>
-        <option value="release_date.desc">Release Date (desc.)</option>
-        <option value="release_date.asc">Release Date (asc.)</option>
-        <option value="original_title.desc">Name(desc.)</option>
-        <option value="original_title.asc">Name(asc.)</option>
+
+    <select id="genre" name="sortMethod">
+        <option style="display:none">All Genres</option>
+        <option value="27">Horror</option>
+        <option value="16">Animated</option>
+        <option value="35">Comedy</option>
+        <option value="18">Drama</option>
+        <option value="12">Adventure</option>
+        <option value="99">Documentary</option>
+        <option value="53">Thriller</option>
+
     </select>
-    <input type="submit" name="sortMethod" value="Sort" />
+
+    <input type="submit" id="genre" name="sortMethod" value="Sort" />
+    <br />
 </form>
+
 
 @foreach (Movie r in Model)
 {
@@ -26,7 +33,6 @@
 
         <img src=" @posterURL" alt="No Img"  height="100" />
         <h3>@r.original_title</h3>
-        <p>@r.popularity</p>
         <br />
     </a>
 }
