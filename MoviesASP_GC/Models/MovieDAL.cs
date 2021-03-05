@@ -34,6 +34,7 @@ namespace MoviesAPI_GC.Models
             //Web Requests sometimes need Headers/User Agent prop
             HttpWebRequest request = WebRequest.CreateHttp(url);
             HttpWebResponse response = null;
+
             response = (HttpWebResponse)request.GetResponse();
             StreamReader rd = new StreamReader(response.GetResponseStream());
             string json = rd.ReadToEnd();

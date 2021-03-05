@@ -27,6 +27,19 @@
         a{
             justify-content: center;
         }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            background-color: whitesmoke;
+            color: black;
+        }
+
+            button:hover {
+                color: rgb(109,178,164);
+                background-color: rgba(242,107,58, .2);
+            }
     </style>
 
 <h2 class="text">@Model.original_title</h2>
@@ -54,10 +67,16 @@
                 Add Movie To My Favorites
             </button>
         </a>
+        @if (string.IsNullOrEmpty(Model.homepage))
+        {
+
+        }
+        else { 
         <a href="@Model.homepage">
             <button>
                 Movie Home Page
             </button>
         </a>
+        }
     </div>
 </div>
