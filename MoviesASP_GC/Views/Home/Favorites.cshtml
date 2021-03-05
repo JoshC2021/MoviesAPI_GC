@@ -1,16 +1,94 @@
 ﻿@model List<Movie>
+<style>
+    body {
+        background-color: rgb(17,39,80);
+    }
 
-@foreach (Movie m in Model)
-{
-    string posterURL = "https://image.tmdb.org/t/p/original" + @m.poster_path;
-    <h2>@m.title</h2>
-    <img src=" @posterURL" alt="No Img" width="100" height="100" />
-    <h4>Release Date: @m.release_date</h4>
-    <a asp-action="ViewSingleMovie" asp-route-id="@m.id">
-        <button>
-            More Details
-        </button>
-    </a>
-    <a asp-action="Delete" asp-route-id="@m.id">Remove Favorite</a>
-    <br />
-}
+    .pb-3 {
+    }
+
+    .box {
+        background-color: rgba(293,63,40,.7);
+        padding: 25px;
+        border-radius: 25px;
+        display: flex;
+        margin: 25px;
+    }
+    .box2{
+        display:flex;
+        justify-content:space-between;
+        width:100%;
+        margin-left: 20px;
+       
+        
+    }
+    .right{
+        
+        float: right;
+    }
+    .center {
+        float: left;
+        color: white;
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    button {
+        margin: 10px;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border: none;
+        background-color: rgb(250,168,106);
+        color: rgb(17,39,80);
+    }
+
+        button:hover {
+            color: rgb(109,178,164);
+            background-color: rgba(242,107,58, .2);
+        }
+</style>
+
+<div class="stacked">
+    @foreach (Movie m in Model)
+    {
+
+        <div class="box">
+            
+            <div>
+                @{string posterURL = "https://image.tmdb.org/t/p/w92" + @m.poster_path; }
+
+                <img src=" @posterURL" alt="No Img"  />
+            </div>
+            <div class="box2">
+                <div class="center">
+                    <h1>@m.title</h1>
+                    <h6>@m.tagline</h6>
+
+                    <h6>Rating:</h6>
+                    <p>@m.vote_average stars (@m.vote_count reviews)</p>
+                    <h6>Produced by:</h6>
+                    <p>
+                        @foreach (Production_Companies co in m.production_companies)
+                        {
+                            @co.name@:,
+                        }
+                    </p>
+                    <h6>Release Date:</h6>
+                    <p>@m.release_date</p>
+                </div>
+                <div class="right">
+                    <a asp-action="ViewSingleMovie" asp-route-id="@m.id">
+                        <button class="right">
+                            More Details
+                        </button>
+                    </a>
+                    <br />
+                    <a asp-action="Delete" asp-route-id="@m.id">
+                        <button>
+                            Remove from favorites
+                        </button>
+                    </a>
+                   
+                </div>
+            </div>
+        </div>
+    }
+</div>
