@@ -57,6 +57,13 @@
         </p>
         <h6>Released:</h6>
         <p>@Model.release_date</p>
+        <h6>Produced by:</h6>
+        <p>
+            @foreach (Production_Companies co in Model.production_companies)
+            {
+                @co.name@:,
+            }
+        </p>
 
 
         <h6>Run time</h6>
@@ -71,12 +78,13 @@
         {
 
         }
-        else { 
-        <a href="@Model.homepage">
-            <button>
-                Movie Home Page
-            </button>
-        </a>
+        else
+        {
+            <a href="@Model.homepage">
+                <button>
+                    Movie Home Page
+                </button>
+            </a>
         }
     </div>
 </div>
