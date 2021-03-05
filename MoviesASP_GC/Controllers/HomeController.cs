@@ -77,7 +77,7 @@ namespace MoviesAPI_GC.Controllers
             }
 
         }
-      
+      [Authorize]
         public IActionResult Favorites()
         {
             // finds users favorite movies and returns list to view
