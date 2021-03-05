@@ -50,9 +50,14 @@ namespace MoviesAPI_GC.Controllers
             return View(featured);
         }
 
-        public IActionResult Search(string search)
+        public IActionResult Search(string search, int? pageNo)
         {
-            List<Movie> movies = md.SearchMovies(search);
+            int page = pageNo ?? 1;
+            TempData["page"] = page;
+            TempData["CurrentSearch"] = search;
+            Rootobject query = md.SearchMovies(search,page);
+            TempData["totalPages"] = query.total_pages;
+            List<Movie> movies = query.results.ToList();
             return View(movies);
         }
         [Authorize]
