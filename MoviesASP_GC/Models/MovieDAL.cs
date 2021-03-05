@@ -10,11 +10,10 @@ namespace MoviesAPI_GC.Models
 {
     public class MovieDAL
     {
-        public string GetData(string searchName)
+        public string GetData(string searchName, int pageNo, bool b)
         {
-            // something off here
 
-            string url = $"https://api.themoviedb.org/3/search/movie?api_key={Secret.MovieAPIKey}&query={searchName}"; // Movie Model
+            string url = $"https://api.themoviedb.org/3/search/movie?api_key={Secret.MovieAPIKey}&query={searchName}&page={pageNo}"; // Movie Model
 
             //Web Requests sometimes need Headers/User Agent prop
             HttpWebRequest request = WebRequest.CreateHttp(url);
@@ -27,7 +26,6 @@ namespace MoviesAPI_GC.Models
 
         public string GetData(int iD)
         {
-            // something off here
 
             string url = $"https://api.themoviedb.org/3/movie/{iD}?api_key={Secret.MovieAPIKey}"; // Search Model
 
@@ -58,12 +56,12 @@ namespace MoviesAPI_GC.Models
             return r;
         }
 
-        public List<Movie> SearchMovies(string searchName)
+        public Rootobject SearchMovies(string searchName, int pageNo)
         {
-            string json = GetData(searchName);
+            string json = GetData(searchName, pageNo, true);
             Rootobject r = JsonConvert.DeserializeObject<Rootobject>(json);
             List<Movie> qMovies = r.results.ToList();
-            return qMovies;
+            return r;
 
         }
         public List<Movie> SortFeatured(string sortMethod, int pageNo)

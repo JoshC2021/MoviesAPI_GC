@@ -1,4 +1,7 @@
 ﻿@model List<Movie>
+@{
+    int? currentPage = (int)TempData["page"];
+}
 
 @foreach (Movie m in Model)
 {
@@ -11,5 +14,23 @@
             More Details
         </button>
     </a>
-    <br/>
+    <br />
+}
+
+@* next and previous pages, only redirect to different page if it exists, otherwise pulls same page*@
+@if (currentPage > 1)
+{
+    @Html.ActionLink("Prev", "Search", "Home", new { search = TempData["CurrentSearch"] as string, pageNo = currentPage - 1 }, null)
+}
+else
+{
+    @Html.ActionLink("Prev", "Search", "Home", new { search = TempData["CurrentSearch"] as string, pageNo = currentPage }, null)
+}
+@if (currentPage < (int)TempData["totalPages"])
+{
+    @Html.ActionLink("Next", "Search", "Home", new { search = TempData["CurrentSearch"] as string, pageNo = currentPage + 1 }, null)
+}
+else
+{
+    @Html.ActionLink("Next", "Search", "Home", new { search = TempData["CurrentSearch"] as string, pageNo = currentPage }, null)
 }
