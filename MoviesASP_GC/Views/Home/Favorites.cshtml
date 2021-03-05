@@ -1,14 +1,15 @@
 ﻿@model List<Movie>
 <style>
     body {
-        background-color: rgb(17,39,80);
+        background-color: rgb(30,58,111);
+        color: white;
     }
 
     .pb-3 {
     }
 
     .box {
-        background-color: rgba(293,63,40,.7);
+        background-color: rgb(229,144,144);
         padding: 25px;
         border-radius: 25px;
         display: flex;
@@ -36,7 +37,7 @@
         padding: 10px 20px;
         border-radius: 5px;
         border: none;
-        background-color: rgb(250,168,106);
+        background-color: rgb(249,139,58);
         color: rgb(17,39,80);
     }
 
@@ -45,7 +46,7 @@
             background-color: rgba(242,107,58, .2);
         }
 </style>
-
+<h1>My Favorites</h1>
 <div class="stacked">
     @foreach (Movie m in Model)
     {
@@ -60,17 +61,11 @@
             <div class="box2">
                 <div class="center">
                     <h1>@m.title</h1>
-                    <h6>@m.tagline</h6>
+                    <h6><i>@m.tagline</i></h6>
 
                     <h6>Rating:</h6>
-                    <p>@m.vote_average stars (@m.vote_count reviews)</p>
-                    <h6>Produced by:</h6>
-                    <p>
-                        @foreach (Production_Companies co in m.production_companies)
-                        {
-                            @co.name@:,
-                        }
-                    </p>
+                    <p>@m.vote_average /10 (@m.vote_count reviews)</p>
+                    
                     <h6>Release Date:</h6>
                     <p>@m.release_date</p>
                 </div>
