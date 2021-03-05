@@ -1,8 +1,12 @@
 ﻿@model Movie
 
 
-@{ string imgSrc = "http://image.tmdb.org/t/p/" + "w500" + $"{Model.poster_path}";
-   string backdropSrc = "http://image.tmdb.org/t/p/" + "w1280" + $"{Model.backdrop_path}"; }
+@{  string imgSrc = "http://image.tmdb.org/t/p/" + "w500" + $"{Model.poster_path}";
+    string backdropSrc = "http://image.tmdb.org/t/p/" + "w1280" + $"{Model.backdrop_path}";
+    int allLanguages = Model.spoken_languages.Length;
+    int allGenre = Model.genres.Length;
+
+}
     <style>
         body{
             background-image:url(@backdropSrc);
@@ -50,9 +54,16 @@
         <p>@Model.overview</p>
         <h6>Genre(s):</h6>
         <p>
+            @{
+                int biterator = 0;
+            }
             @foreach (Genre genre in Model.genres)
             {
-                @genre.name@:,
+                @genre.name
+                if (++biterator != allGenre)
+                {
+                    @:,
+                }
             }
         </p>
         <h6>Released:</h6>
@@ -61,22 +72,44 @@
 
         <h6>Run time</h6>
         <p>@Model.runtime minutes</p>
+
+        <h6>Available Language(s):</h6>
+        <p>
+            @{
+                int iterator = 0;
+            }
+            @foreach (Spoken_Languages language in Model.spoken_languages)
+            {
+                @language.english_name
+                if (++iterator != allLanguages)
+                {
+                    @:,
+                }
+            }
+        </p>
+
         <p style="color:red">@TempData["error"]</p>
         <a asp-action="AddToFavorites" asp-controller="Home" asp-route-id="@Model.id">
             <button>
                 Add Movie To My Favorites
             </button>
         </a>
-        @if (string.IsNullOrEmpty(Model.homepage))
+        @if (!string.IsNullOrEmpty(Model.homepage))
         {
-
+            <a href="@Model.homepage">
+                <button>
+                    Movie Home Page
+                </button>
+            </a>
         }
-        else { 
-        <a href="@Model.homepage">
-            <button>
-                Movie Home Page
-            </button>
-        </a>
+        @if (!string.IsNullOrEmpty(Model.imdb_id))
+        {
+            string imdbURL = "https://www.imdb.com/title/" + Model.imdb_id;
+            <a href=@imdbURL>
+                <button>
+                    IMDb Page
+                </button>
+            </a>
         }
     </div>
 </div>
