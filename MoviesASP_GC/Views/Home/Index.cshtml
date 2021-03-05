@@ -1,11 +1,10 @@
 ﻿@model List<Movie>
-Featured
-<form asp-action="Search" asp-controller="Home">
+<h1>Featured</h1>
+@*<form asp-action="Search" asp-controller="Home">
     <input type="text" name="search" placeholder="Search Movies by Title" />
     <input type="submit" value="Search" />
     <br />
-
-</form>
+</form>*@
 
 <form asp-action="Index" asp-controller="Home">
 
@@ -62,12 +61,7 @@ Featured
     }
 
 </div>
-<form asp-action="Index" asp-controller="Home">
 
-
-
-    <input type="button" name="pageNo" value="Next Page" />
-</form>
 
 
 <style>

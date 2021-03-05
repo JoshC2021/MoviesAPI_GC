@@ -22,6 +22,13 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Favorites">Favorites</a>
                         </li>
+                        <li class="nav-item">
+                            <form asp-action="Search" asp-controller="Home">
+                                <input type="text" name="search" placeholder="Search Movies by Title" />
+                                <input type="submit" value="Search" />
+                                <br />
+                            </form>
+                        </li>
                     </ul>
                 </div>
             </div>
